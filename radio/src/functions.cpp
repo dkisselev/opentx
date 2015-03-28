@@ -509,7 +509,7 @@ void evalFunctions()
           {
             tmr10ms_t tmr10ms = get_tmr10ms();
             uint8_t repeatParam = CFN_PLAY_REPEAT(cfn);
-            if (!functionsContext.lastFunctionTime[i] || (repeatParam && (signed)(tmr10ms-functionsContext.lastFunctionTime[i])>=1000*repeatParam)) {
+            if (!functionsContext.lastFunctionTime[i] || (repeatParam && (signed)(tmr10ms-functionsContext.lastFunctionTime[i])>=100*repeatParam)) {
               functionsContext.lastFunctionTime[i] = tmr10ms;
               AUDIO_PLAY(AU_FRSKY_FIRST+CFN_PARAM(cfn));
             }

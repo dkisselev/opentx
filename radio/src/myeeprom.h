@@ -699,7 +699,13 @@ PACK(typedef struct {
 #define CFN_TIMER_INDEX(p)  ((p)->all.param)
 #define CFN_GVAR_INDEX(p)   ((p)->gvar.param)
 #define CFN_PLAY_REPEAT(p)  ((p)->all.param)
-#define CFN_PLAY_REPEAT_MUL 10
+
+#if defined(AUDIO)
+  #define CFN_PLAY_REPEAT_MUL 10
+#else
+  #define CFN_PLAY_REPEAT_MUL 1
+#endif
+
 #define CFN_GVAR_MODE(p)    ((p)->gvar.mode)
 #define CFN_PARAM(p)        ((p)->value)
 #define CFN_RESET(p)        ((p)->all.active = 0, CFN_PARAM(p) = 0)

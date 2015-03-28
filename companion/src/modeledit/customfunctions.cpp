@@ -6,8 +6,10 @@ RepeatComboBox::RepeatComboBox(QWidget *parent, int & repeatParam):
   QComboBox(parent),
   repeatParam(repeatParam)
 {
-  unsigned int step = IS_ARM(GetEepromInterface()->getBoard()) ? 1 : 10;
-  int value = repeatParam/step;
+  unsigned int maxValue = IS_ARM(GetEepromInterface()->getBoard()) ? 60 : 15;
+
+  unsigned int step = 1;
+  int value = repeatParam / step;
 
   if (step == 1) {
     addItem(QObject::tr("Played once, not during startup"), -1);
@@ -16,7 +18,7 @@ RepeatComboBox::RepeatComboBox(QWidget *parent, int & repeatParam):
 
   addItem(QObject::tr("No repeat"), 0);
 
-  for (unsigned int i=step; i<=60; i+=step) {
+  for (unsigned int i=step; i<=maxValue; i+=step) {
     addItem(QObject::tr("%1s").arg(i), i);
   }
 
@@ -33,7 +35,7 @@ void RepeatComboBox::onIndexChanged(int index)
 
 void RepeatComboBox::update()
 {
-  unsigned int step = IS_ARM(GetEepromInterface()->getBoard()) ? 1 : 10;
+  unsigned int step = IS_ARM(GetEepromInterface()->getBoard()) ? 1 : 1;
   int value = repeatParam/step;
   if (step == 1) {
     value++;
